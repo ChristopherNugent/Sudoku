@@ -16,7 +16,7 @@ class SudokuTable:
 				#print(i)
 				#print(i // self.size)
 				#print(i % self.size)
-				self.table[i // self.size][i % self.size] = ord(para[i]) - ord('0')		
+				self.table[i // self.size][i % self.size] = int(para[i], 16)		
 
 
 	def copy(self):
@@ -30,7 +30,7 @@ class SudokuTable:
 		serial = ''
 		for row in self.table:
 			for item in row:
-				serial += chr(item + ord('0'))
+				serial += hex(item)[2:]
 
 		return serial
 
@@ -189,4 +189,6 @@ class SudokuTable:
 
 	def print(self):
 		for row in self.table:
-			print(str(row))
+			for item in row:
+				print(hex(item)[2::], end = ' ')
+			print()
