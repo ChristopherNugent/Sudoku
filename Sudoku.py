@@ -7,8 +7,10 @@ class SudokuTable:
 			self.size = para**2
 		elif type(para) == type("abc"):
 			total = len(para)
-			if(total**(1/4) % 1 != 0):
-				raise ValueError
+			if total > 4**4:
+				raise ValueError('Only tables up to 16x16 are supported at the moment.')
+			if total**(1/4) % 1 != 0:
+				raise ValueError('The length of the serial must be of lenth n**4 where n is some integer.')
 			self.size = int(total**(1/2)) 
 			self.root = int(total **(1/4))
 			self.table = [[0 for column in range(self.root**2)] for row in range(self.root**2)]
@@ -87,13 +89,13 @@ class SudokuTable:
 				if other:
 					possibles.remove(other)
 			except ValueError:
-				1
+				pass
 		for other in self.subgridOf(x, y):
 			try:
 				if other:
 					possibles.remove(other)
 			except ValueError:
-				1
+				pass
 		return possibles
 
 
