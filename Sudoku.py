@@ -1,14 +1,16 @@
+from BaseConverter import BaseConverter
+
 class SudokuTable:
 
 	def __init__(self, para):
+		# empty table
 		if type(para) == type(1):
 			self.table = [[0 for column in range(para**2)] for row in range(para**2)]
 			self.root = para
 			self.size = para**2
+		# from serial
 		elif type(para) == type("abc"):
 			total = len(para)
-			if total > 4**4:
-				raise ValueError('Only tables up to 16x16 are supported at the moment.')
 			if total**(1/4) % 1 != 0:
 				raise ValueError('The length of the serial must be of lenth n**4 where n is some integer.')
 			self.size = int(total**(1/2)) 
@@ -18,7 +20,7 @@ class SudokuTable:
 				#print(i)
 				#print(i // self.size)
 				#print(i % self.size)
-				self.table[i // self.size][i % self.size] = int(para[i], 16)		
+				self.table[i // self.size][i % self.size] = BaseConverter.wide2int(para[i])		
 
 
 	def copy(self):
@@ -32,7 +34,7 @@ class SudokuTable:
 		serial = ''
 		for row in self.table:
 			for item in row:
-				serial += hex(item)[2:]
+				serial += BaseConverter.int2wide(item)
 
 		return serial
 
@@ -192,5 +194,5 @@ class SudokuTable:
 	def print(self):
 		for row in self.table:
 			for item in row:
-				print(hex(item)[2::], end = ' ')
+				print(BaseConverter.int2wide(item), end=' ')
 			print()
