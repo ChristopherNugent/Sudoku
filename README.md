@@ -11,3 +11,4 @@ Puzzles are created with `puzzle = SudokuTable(serial)`, and the solution (if it
 # Todo
 + Convert into working module. 
 + Add more logical solving tools, such as unique possibles within a subset.
++ Change method and variables names to better follow Python guidelines.
