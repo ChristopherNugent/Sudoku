@@ -151,7 +151,7 @@ class SudokuTable:
 	def findAllFreebies(self):
 		"""Finds all possible freebies in the table, including those cascaded from earlier freebies"""
 		while(self.findFreebies()):
-			1
+			pass
 
 	def firstUnknown(self):
 		"""Returns the coordinates of the first 0 in the SudokuTable as an array"""
