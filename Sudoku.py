@@ -79,9 +79,9 @@ class SudokuTable:
 	def possibles(self, x, y):
 		"""Returns a list of all the allowed values for the element in x, y"""
 		if self.get(x, y) != 0:
-			return []
+			return set()
 
-		possibles = [i for i in range(1, self.size + 1)]
+		possibles = {i for i in range(1, self.size + 1)}
 		for other in self.col(x):
 			#no errors should be raised here
 			if other:
@@ -90,13 +90,13 @@ class SudokuTable:
 			try:
 				if other:
 					possibles.remove(other)
-			except ValueError:
+			except KeyError:
 				pass
 		for other in self.subgridOf(x, y):
 			try:
 				if other:
 					possibles.remove(other)
-			except ValueError:
+			except KeyError:
 				pass
 		return possibles
 
@@ -112,7 +112,7 @@ class SudokuTable:
 
 	def breaksRules(self, subset):
 		"""Checks if a subset of the table (row, column, or subgrid) breaks any Sudoku rules"""
-		expected = [i for i in range(1, self.size + 1)]
+		expected = {i for i in range(1, self.size + 1)}
 		for item in subset:
 			if item:
 				try:
